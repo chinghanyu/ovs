@@ -3696,7 +3696,12 @@ xlate_output_action(struct xlate_ctx *ctx,
         if (port != ctx->xin->flow.in_port.ofp_port) {
             compose_output_action(ctx, port, NULL);
         } else {
-            xlate_report(ctx, "skipping output to input port");
+            /* Hans: override this setting so that it would be easier to make
+             *       a node work as a wireless repeater
+             */
+            //xlate_report(ctx, "skipping output to input port");
+            xlate_report(ctx, "output to input port");
+            compose_output_action(ctx, port, NULL);
         }
         break;
     }
